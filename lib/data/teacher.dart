@@ -3,7 +3,7 @@ import 'package:mystudent/model/teacher.dart';
 class DataTeacher {
   final teacher1 = Teacher("1",
       name: "Violet",
-      birthday: DateTime(1956, 12, 19),
+      birthday: DateTime(1956, 12, 30),
       address: "Japanese",
       phoneNumber: 0325698741,
       classroom: "Zio1",
