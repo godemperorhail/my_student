@@ -10,7 +10,7 @@ class DataTeacher {
       image: 'assets/images/teacher1.png');
   final teacher2 = Teacher("2",
       name: "Black Bullet",
-      birthday: DateTime(1956, 9, 10),
+      birthday: DateTime(1956, 9, 28),
       address: "Japanese",
       phoneNumber: 0325698741,
       classroom: "Zio2",
