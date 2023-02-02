@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mystudent/data/teacher.dart';
+import 'package:mystudent/login.dart';
 import 'list_student.dart';
 import 'model/teacher.dart';
 import 'myprofile.dart';
@@ -28,98 +29,143 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Column(
-              children: [
-                Flexible(
-                  child: GridView.count(
-                    primary: false,
-                    padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyProfile()));
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text("Thông Tin Tài Khoản"),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ListStudent()));
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text("Danh Sách Học Sinh"),
-                        ),
-                      ),
-                      InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text("Danh Sách Đồng nghiệp"),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text("Tình Trạng Học Phí"),
-                        ),
-                      ),
-                      InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text(
-                              "Danh Sách Học Sinh Đã Hoàn Thành Đóng Học Phí"),
-                        ),
-                      ),
-                      InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.teal[100],
-                          child: const Text(
-                              "Danh Sách Học Sinh Chưa Hoàn Thành Đóng Học Phí"),
-                        ),
-                      ),
-                    ],
+          appBar: AppBar(
+            title: const Text("Menu"),
+            backgroundColor: Colors.green[800],
+          ),
+          backgroundColor: Colors.green[80],
+          drawer: Drawer(
+            child: ListView(
+              children: <Widget>[
+                UserAccountsDrawerHeader(
+                  accountName: Text(teacher.name ?? ""),
+                  accountEmail: Text(teacher.email ?? ""),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage(teacher.image ?? ""),
+                  ),
+                  decoration: BoxDecoration(color: Colors.green[800]),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyProfile()));
+                  },
+                  splashColor: Colors.greenAccent,
+                  child: const ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text("Profile"),
                   ),
                 ),
-                Container(
-                  // padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                  color: Colors.blue,
-                  child: Column(
-                    children: [
-                      const Text("Thông Tin Giáo Viên:",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.tealAccent,
-                            fontSize: 30,
-                          )),
-                      Text(teacher.name.toString()),
-                      Text(teacher.phoneNumber.toString()),
-                      Text(teacher.birthday.toString()),
-                    ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
+                  splashColor: Colors.greenAccent,
+                  child: const ListTile(
+                    leading: Icon(Icons.vpn_key),
+                    title: Text("Setting Password"),
                   ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
+                  splashColor: Colors.greenAccent,
+                  child: const ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text("Info"),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
+                  splashColor: Colors.greenAccent,
+                  child: const ListTile(
+                    leading: Icon(Icons.exit_to_app),
+                    title: Text("Logout"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: Container(
+            padding: const EdgeInsets.all(40.0),
+            child: GridView.count(
+              primary: false,
+              padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+              children: <Widget>[
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "Class",
+                  iconData: Icons.class_,
+                  warna: Colors.lightBlue,
+                ),
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "List Student",
+                  iconData: Icons.school,
+                  warna: Colors.lightBlue,
+                ),
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "Account",
+                  iconData: Icons.person_pin,
+                  warna: Colors.lightBlue,
+                ),
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "Setting",
+                  iconData: Icons.list_alt_sharp,
+                  warna: Colors.lightBlue,
+                ),
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "Subject",
+                  iconData: Icons.local_library,
+                  warna: Colors.lightBlue,
+                ),
+                MyMenu(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListStudent()));
+                  },
+                  title: "Library",
+                  iconData: Icons.library_books,
+                  warna: Colors.lightBlue,
                 ),
               ],
             ),
@@ -139,5 +185,41 @@ class HomePageState extends State<HomePage> {
       }
     }
     return lstDataTeacher[0];
+  }
+}
+
+class MyMenu extends StatelessWidget {
+  String? title;
+  IconData? iconData;
+  MaterialColor? warna;
+  Function onTap;
+
+  MyMenu({this.title, this.iconData, this.warna, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () => {onTap()},
+        splashColor: Colors.greenAccent,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                iconData,
+                size: 70.0,
+                color: warna,
+              ),
+              Text(
+                title.toString(),
+                style: const TextStyle(fontSize: 16.0),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

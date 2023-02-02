@@ -46,6 +46,7 @@ class _ListStudentState extends State<ListStudent> {
                     builder: (context) => StudentDetail(lstStudent[index])));
           });
         },
+        splashColor: Colors.greenAccent,
         child: Card(
           child: Column(
             children: [
